@@ -1,0 +1,96 @@
+<section>
+
+   
+    <p-button label="Add Course" icon="pi pi-minus" text (onClick)="openDialog()" />
+    <form action="">
+        <p-table [value]="courses" dataKey="id" [tableStyle]="{ 'min-width': '60rem' }" [expandedRowKeys]="expandedRows"
+            (onRowExpand)="onRowExpand($event)" (onRowCollapse)="onRowCollapse($event)">
+       
+            <ng-template #header>
+                <tr>
+                    <th style="width: 5rem"></th>
+                    <th >Name <p-sortIcon field="name" /></th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Actions</th>
+
+                </tr>
+            </ng-template>
+            <ng-template #body let-i="rowIndex" let-course let-expanded="expanded">
+
+                <tr>
+
+                    <td>
+                        <p-button type="button" pRipple [pRowToggler]="course"
+                            [text]="true" [rounded]="true" [plain]="true"
+                            [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'" />
+                    </td>
+                    
+                    <td>{{ course.name }}</td>
+
+                   
+                  
+
+                    <td>{{ course.startDate | date }}</td>
+                    <td>{{ course.endDate | date }}</td>
+                    <td>
+                        <p-button (onClick)="openUpdateCourseDialog(course.id)" class="me-2" label="edit" />
+                        <p-button (onClick)="openAddSubcourseDialog(course.id)" label="add subcourse" />
+                    </td>
+
+                </tr>
+            </ng-template>
+            <ng-template #expandedrow let-course>
+                <tr>
+                    <td colspan="7">
+                        <div class="p-4">
+                            <h5>Orders for {{ course.name }}</h5>
+                          
+                            <p-table [value]="course.subcourses" dataKey="id">
+                                <ng-template #header>
+                <tr>
+                    <th >Name </th>
+                    <th >Start Date </th>
+                    <th>End Date </th>
+                    <th >action </th>
+                    <th style="width: 4rem"></th>
+                </tr>
+            </ng-template>
+
+            <ng-template #body  let-order let-i="rowIndex">
+
+                <tr>
+                 
+                 
+
+                    
+                    <td>{{ order.name }}</td>
+                    <td>{{ order.startDate | date }}</td>
+                    <td>{{ order.endDate | date }}</td>
+
+                    <td><p-button (onClick)="openUpdateSubcourse(course.id , order.id)" label="edit" type="button" icon="pi pi-search" />
+                    </td>
+                </tr>
+
+
+
+
+
+
+            </ng-template>
+
+
+            <ng-template #emptymessage>
+                <tr>
+                    <td colspan="6">There are no order for this product yet.</td>
+                </tr>
+            </ng-template>
+        </p-table>
+        </div>
+        </td>
+        </tr>
+        </ng-template>
+        </p-table>
+    </form>
+
+</section>

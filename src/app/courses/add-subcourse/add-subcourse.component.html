@@ -1,0 +1,41 @@
+<section>
+    <div class="header">
+        <h6>{{ SubCourseId? "Update Subcourse": "Add Subcourse"}}</h6>
+        <i (click)="close()" class="fa-solid fa-xmark"></i>
+    </div>
+    <form [formGroup]="courseForm">
+        <div class="add-course-form">
+            <div class="item">
+                <label for="">Name</label>
+                <input [ngClass]="{'invalid':courseForm.get('name')?.invalid && courseForm.get('name')?.touched}"
+                    formControlName="name" type="text">
+            </div>
+            <div class="item">
+                <label for="">Start Date</label>
+
+                <p-datepicker formControlName="startDate"
+                    [ngClass]="{'invalid-date':courseForm.get('startDate')?.invalid && courseForm.get('startDate')?.touched}"
+                    inputId="over_label" showIcon iconDisplay="input" />
+
+            </div>
+            <div class="item">
+                <label for="">End Date</label>
+
+                <p-datepicker formControlName="endDate"
+                    [ngClass]="{'invalid-date':courseForm.get('endDate')?.invalid && courseForm.get('endDate')?.touched}"
+                    inputId="over_label" showIcon iconDisplay="input" />
+                <div *ngIf="courseForm.errors?.['dateRangeInvalid'] && courseForm.get('endDate')?.touched">
+                    <small class="text-danger">End Date cannot be before Start Date.</small>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="courseForm.hasError('subcourseDateInvalid') && courseForm.touched" style="color: red">
+            Subcourse dates must be within the parent course dates.
+          </div>
+          <div *ngIf="courseForm.hasError('subcourseOverlap') && courseForm.touched" style="color: red">
+            The selected dates overlap with an existing subcourse. Please choose different dates.
+          </div>
+        <button (click)="SubCourseId? updateSubcourse() :addSubCourse()" class="btn mt-3 btn-primary">{{SubCourseId?
+            "Update Subcourse": "Add Subcourse"}}</button>
+    </form>
+</section>

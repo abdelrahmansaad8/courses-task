@@ -1,0 +1,63 @@
+section{
+    .header{
+        height: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        h6{
+            margin: 0px;
+        }
+
+        i{
+            cursor: pointer;
+            &:hover{
+                color: #ff6b6b;
+            }
+        }
+    }
+
+
+
+    .add-course-form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    
+        .item {
+            display: flex;
+            flex-direction: column;
+    
+            input {
+                height: 42px;
+                border: 1px solid #cbd5e1;
+                border-radius: 6px;
+                outline: none;
+            }
+    
+            ::ng-deep {
+                .p-datepicker {
+                    width: 100%;
+                }
+    
+                .p-datepicker-day {
+                    margin: 0px;
+                }
+    
+                .invalid-date {
+                    .p-datepicker-input{
+                        border: 1px solid #ff6b6b;
+    
+                    }
+                }
+            }
+    
+            .invalid {
+                border: 1px solid #ff6b6b;
+            }
+    
+        }
+    }
+}
+
+
